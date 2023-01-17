@@ -1,11 +1,11 @@
 
 import { createApp } from "https://cdnjs.cloudflare.com/ajax/libs/vue/3.2.45/vue.esm-browser.min.js";
-import pagination from "./pagination.js"; //引入分頁
+
 
 let productModal = {};
 let delProductModal = {};
 // vue
-const app = createApp({
+createApp({
   //資料
   data() {
     return {
@@ -16,7 +16,6 @@ const app = createApp({
         imagesUrl: [],
       },
       isNew: false, //判斷是編輯還是新增
-      page:{}//儲值分頁資料 
     }
   },
   //方法集合
@@ -32,12 +31,10 @@ const app = createApp({
           window.location = 'login.html';
         })
     },
-    getProducts(page = 1) { //預設頁數是1
-      const url = `${this.apiUrl}api/${this.apiPath}/admin/products/?page=${page}`;
-      axios.get(url)
+    getProducts() {
+      axios.get(`${this.apiUrl}api/${this.apiPath}/admin/products`)
         .then((res) => {
           this.products = res.data.products;
-          this.page = res.data.pagination;
         })
         .catch((error) => {
           alert(error.data.message);
@@ -92,10 +89,6 @@ const app = createApp({
         }) 
     }
   },
-  //區域元件
-  components: {
-    pagination,
-  },
   //生命週期
   mounted() {
     // 取得Token
@@ -108,13 +101,5 @@ const app = createApp({
 
     productModal = new bootstrap.Modal("#productModal");
     delProductModal = new bootstrap.Modal('#delProductModal');
-  },
-});
-
-
-app.component('product-modal',{
-  props: ['tempProduct','updateProduct'],
-  template: '#product-modal-template',
-});
-
-app.mount("#app");
+  }
+}).mount("#app");
