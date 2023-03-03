@@ -40,23 +40,22 @@
             </th>
           </tr>
         </thead>
-        <tbody v-for="item in products" :key="item.id">
+        <tbody v-for="product in products" :key="product.id">
           <tr>
-            <td><span class="badge bg-secondary">{{ item.category }}</span></td>
-            <td>{{ item.title }}</td>
-            <td class="text-start">{{ item.origin_price }}</td>
-            <td class="text-start">{{ item.price }}</td>
+            <td><span class="badge bg-secondary">{{ product.category }}</span></td>
+            <td>{{ product.title }}</td>
+            <td class="text-start">{{ product.origin_price }}</td>
+            <td class="text-start">{{ product.price }}</td>
             <td>
-              <span class="text-success" v-if="item.is_enabled">啟用</span>
-              <span v-else>未啟用</span>
+              <span class="text-success">{{ product.is_enabled ? '啟用' : '未啟用' }}</span>
             </td>
             <td>
               <div class="btn-group">
-                <!-- v:on裡的item是參數，當下要編輯/刪除的項目 -->
-                <button type="button" id="editBtn" class="btn btn-outline-primary btn-sm" @click="openModal('edit', item)">
+                <!-- v:on裡的product是參數，當下要編輯/刪除的項目 -->
+                <button type="button" id="editBtn" class="btn btn-outline-primary btn-sm" @click="openModal('edit', product)">
                   編輯
                 </button>
-                <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('del', item)">
+                <button type="button" class="btn btn-outline-danger btn-sm" @click="openModal('del', product)">
                   刪除
                 </button>
               </div>

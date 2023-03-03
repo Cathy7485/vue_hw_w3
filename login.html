@@ -74,11 +74,10 @@
 								.then((res) => {
 									const { token, expired } = res.data;
 									document.cookie = `hexToken=${token}; expires=${new Date(expired)};`; //hexToken是自定義名稱，expired要先轉型
-									axios.defaults.headers.common['Authorization'] = token; //每次都把token夾帶到headers裡
 									window.location = 'products.html'; // 跳轉畫面
 								})
-								.catch((error) => {
-									alert(error.response.data.message);
+								.catch((err) => {
+									alert(err.data.message);
 								})
 						},
 					}

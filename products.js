@@ -36,11 +36,11 @@ createApp({
         .then((res) => {
           this.products = res.data.products;
         })
-        .catch((error) => {
-          alert(error.data.message);
+        .catch((err) => {
+          alert(err.data.message);
         })
     },
-    openModal(status, item) {
+    openModal(status, product) {
       if (status === 'add') {
         productModal.show();
         this.isNew = true; //是新增
@@ -52,10 +52,10 @@ createApp({
         productModal.show();
         this.isNew = false; //不是新增
         //會帶入當前要編輯的資料
-        this.tempProduct = { ...item }; //要展開才不會沒儲存就資料連動
+        this.tempProduct = { ...product }; //要展開才不會沒儲存就資料連動
       } else if(status === 'del'){
         delProductModal.show();
-        this.tempProduct = { ...item }; // 等等要取id使用
+        this.tempProduct = { ...product }; // 等等要取id使用
       }
     },
     updateProduct(){
@@ -72,8 +72,8 @@ createApp({
         this.getProducts(); //新增完重新取得產品資料
         productModal.hide();//新增完關閉視窗
       })
-      .catch(error=>{
-        alert(error.data.message);
+      .catch(err=>{
+        alert(err.data.message);
       }) 
     },
     deleteProduct(){
@@ -84,8 +84,8 @@ createApp({
           delProductModal.hide(); //關閉視窗
           alert('刪除成功！');
         })
-        .catch(error => {
-          alert(error.data.message);
+        .catch(err => {
+          alert(err.data.message);
         }) 
     }
   },
